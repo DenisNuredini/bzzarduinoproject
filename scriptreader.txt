@@ -1,0 +1,60 @@
+#include <LiquidCrystal.h>
+
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2); // initialize library with interface pin numbers
+
+// The additional white space is intentional to make things legible and look nice.
+String partOne = "       Once upon a time in a kingdom far, far away, the king and queen were blessed with a beautiful baby girl. And throughout the land, everyone was happy... until the sun went down and they saw that their daughter was cursed with a frightful enchantment that took hold each and every night. Desperate, they sought the help of a fairy godmother who had them lock the young princess away in a tower,               ";
+String partTwo = "       there to await the kiss... of the handsome Prince Charming. It was he who would chance the perilous journey through blistering cold and scorching desert traveling for many days and nights, risking life and limb to reach the Dragon's keep. For he was the bravest, and most handsome... in all the land. And it was destiny that his kiss would break the dreaded curse. He alone would climb to the highest room of       ";
+int ii = 0;
+int partOneLength;
+int partTwoLength;
+String toShow;
+
+
+void setup() 
+{
+  partOneLength = partOne.length();
+  partTwoLength = partTwo.length();
+  lcd.begin(16, 1);// LCD setup for columns and rows: 
+  lcd.print("Shrek 2");// Print text to LCD.
+  delay(3000);
+
+  lcd.clear();
+  lcd.home();
+}
+
+
+void loop() 
+{
+  lcd.home();
+
+  toShow = partOne.substring(ii,ii+16);  // Get 16 characters to display on LCD
+  
+  lcd.print(toShow); 
+
+  ii = ii + 2;
+
+  if(ii>(partOneLength-16)) { //reset
+    ii = 0;
+  }
+
+  delay(500);
+}
+
+
+void loopPartTwo() 
+{ // second method to desplay more text
+  lcd.home();
+
+  toShow = partTwo.substring(ii,ii+16);
+  
+  lcd.print(toShow);
+
+  ii = ii + 2;
+
+  if(ii>(partTwoLength-16)) {
+    ii = 0;
+  }
+
+  delay(500);
+}
